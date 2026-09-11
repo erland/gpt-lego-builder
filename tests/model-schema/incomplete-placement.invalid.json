@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "metadata": {"model_id": "bad-placement", "name": "Bad placement", "description": "", "status": "draft"},
+  "requirements": {"source_prompt": "test", "design_intent": "test"},
+  "dimensions": {"unit": "LDU", "min": {"x": 0, "y": 0, "z": 0}, "max": {"x": 20, "y": 24, "z": 20}},
+  "submodels": [{
+    "id": "main", "name": "Main", "parts": [{
+      "instance_id": "p1",
+      "ldraw_part": "3001.dat",
+      "color": 4,
+      "placement": {"position": {"x": 0, "y": 0}},
+      "validation": {"catalog_reference": "unverified", "placement": "unchecked"}
+    }]
+  }],
+  "validation": {"schema": "pending", "catalog": "pending", "geometry": "pending"}
+}

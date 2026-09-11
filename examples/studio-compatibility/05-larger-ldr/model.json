@@ -1,0 +1,1855 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "model_id": "studio-large-001",
+    "name": "Studio larger LDR",
+    "description": "Stud.io-kompatibilitetstest för LDraw-export.",
+    "status": "validating"
+  },
+  "requirements": {
+    "source_prompt": "Ett regelbundet fält med 60 klossar.",
+    "design_intent": "Kompatibilitetstest för BrickLink Studio.",
+    "max_parts": 60,
+    "preferred_colors": [
+      4,
+      1,
+      2,
+      14,
+      15
+    ],
+    "detail_level": "simple",
+    "constraints": [
+      "Endast verifierade delar",
+      "Ortogonala placeringar"
+    ]
+  },
+  "dimensions": {
+    "unit": "LDU",
+    "min": {
+      "x": -400,
+      "y": 0,
+      "z": -300
+    },
+    "max": {
+      "x": 400,
+      "y": 24,
+      "z": 300
+    }
+  },
+  "submodels": [
+    {
+      "id": "main",
+      "name": "60 part field",
+      "parts": [
+        {
+          "instance_id": "p001",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": -250,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p002",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": -200,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p003",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": -150,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p004",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": -100,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p005",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p006",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p007",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": 50,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p008",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": 100,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p009",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": 150,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p010",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": 200,
+              "y": 0,
+              "z": -150
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p011",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": -250,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p012",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": -200,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p013",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": -150,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p014",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": -100,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p015",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p016",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p017",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": 50,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p018",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": 100,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p019",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": 150,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p020",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": 200,
+              "y": 0,
+              "z": -100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p021",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": -250,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p022",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": -200,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p023",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": -150,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p024",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": -100,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p025",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p026",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p027",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": 50,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p028",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": 100,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p029",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": 150,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p030",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": 200,
+              "y": 0,
+              "z": -50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p031",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": -250,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p032",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": -200,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p033",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": -150,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p034",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": -100,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p035",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p036",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p037",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": 50,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p038",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": 100,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p039",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": 150,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p040",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": 200,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p041",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": -250,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p042",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": -200,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p043",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": -150,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p044",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": -100,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p045",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p046",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p047",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": 50,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p048",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": 100,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p049",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": 150,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p050",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": 200,
+              "y": 0,
+              "z": 50
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p051",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": -250,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p052",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": -200,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p053",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": -150,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p054",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": -100,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p055",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p056",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p057",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": 50,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p058",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": 100,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p059",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": 150,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p060",
+          "ldraw_part": "3003.dat",
+          "color": 15,
+          "placement": {
+            "position": {
+              "x": 200,
+              "y": 0,
+              "z": 100
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "schema": "pending",
+    "catalog": "pending",
+    "geometry": "pending",
+    "messages": [
+      "Stud.io-kompatibilitetssvit; statisk gate körs före export."
+    ]
+  }
+}

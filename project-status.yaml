@@ -1,0 +1,85 @@
+schema_version: 1
+project:
+  id: lego-modellbyggaren
+  name: LEGO Modellbyggaren
+plan:
+  path: docs/development-plan.md
+  total_steps: 18
+progress:
+  current_phase: stable-release-blocked
+  current_step: 18
+  last_completed_step: 18
+  completed_steps:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  skipped_steps: []
+  inserted_steps: []
+state:
+  overall: pass
+  blocking_issues: []
+  warnings:
+  - Den lokala utvecklingskatalogen är en minimal fixture. Full official_release-katalog
+    byggs från LDraw complete.zip i releaseflödet.
+  - Historisk verifiering av del/färg-kombination ingår inte i version 1.
+  - Geometri v1 verifierar bara enkla Brick/Plate-profiler och är inte en full connection-,
+    collision- eller stabilitetsmotor.
+  - Automatisk kompatibilitetssvit verifierar LDraw-format men faktisk GUI-öppning
+    i BrickLink Studio är ännu inte körd och står som not_run.
+  - Kravtolkaren är regelbaserad v1 och stöder främst vanliga svenska/engelska formuleringar;
+    komplexa motsägelser kräver senare utökning.
+  - Release candidate 1.0.0-rc.2 är klar; stable-release-gaten blockerar 1.0.0 tills manuell BrickLink Studio GUI-verifiering har status pass.
+next_step:
+  recommended: 18
+  title: Genomför manuell BrickLink Studio-verifiering
+  reason: Alla automatiska gates passerar, men stabil 1.0.0 blockeras explicit tills GUI-checklistan har status pass.
+resume:
+  supported: true
+  required_files:
+  - gpt-project.yaml
+  - project-status.yaml
+  - docs/development-plan.md
+  - docs/construction-strategy.md
+  - docs/requirement-interpretation.md
+  - docs/static-validation.md
+  - docs/geometry-validation.md
+  - docs/studio-compatibility.md
+  - STATUS.md
+  - PROJECT.md
+  - catalog/source.yaml
+  - catalog/catalog.json
+  - schemas/interpreted-request.schema.json
+  - schemas/construction-plan.schema.json
+  - docs/failure-handling.md
+  - schemas/failure-resolution.schema.json
+  - docs/evals.md
+  - evals/cases.json
+  - docs/chat-runtime.md
+  - scripts/runtime_self_test.py
+  - docs/custom-gpt-runtime.md
+  - scripts/test_custom_gpt_distribution.py
+  - docs/runtime-parity-and-hygiene.md
+  - scripts/test_runtime_parity.py
+  - docs/ci-and-release.md
+  - scripts/verify_release_artifacts.py
+  - scripts/test_ci_release_workflows.py
+  - docs/release-readiness.md
+  - docs/stable-release.md
+  - scripts/verify_stable_release.py
+  - docs/known-limitations.md
+  human_readable_status: Steg 18 är genomfört så långt denna miljö kan verifiera. Stable-release-gaten är implementerad och RC2 är klar. Stabil 1.0.0 kräver nu endast extern BrickLink Studio GUI-verifiering med status pass.

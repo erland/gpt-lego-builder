@@ -1,0 +1,96 @@
+name: Release
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Test-release version, for example 0.16.0-rc.1
+        required: true
+        type: string
+      ldraw_release:
+        description: LDraw release identifier recorded in catalog metadata
+        required: false
+        default: latest
+        type: string
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+      - run: pip install -r scripts/requirements.txt
+      - name: Resolve release version
+        id: version
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
+          MANUAL_VERSION: ${{ inputs.version }}
+        run: |
+          VERSION="${RELEASE_TAG:-$MANUAL_VERSION}"
+          VERSION="${VERSION#v}"
+          if [[ -z "$VERSION" || "$VERSION" =~ [[:space:]] ]]; then
+            echo "Invalid release version: '$VERSION'" >&2
+            exit 1
+          fi
+          echo "value=$VERSION" >> "$GITHUB_OUTPUT"
+      - name: Project lint and workflow contracts
+        run: |
+          python scripts/lint_gpt_project.py --project-root .
+          python scripts/test_ci_release_workflows.py
+      - name: Build verified official LDraw catalog
+        env:
+          LDRAW_RELEASE: ${{ inputs.ldraw_release || 'latest' }}
+        run: |
+          curl --fail --location --retry 3             https://library.ldraw.org/library/updates/complete.zip             --output /tmp/ldraw-complete.zip
+          python scripts/build_ldraw_catalog.py /tmp/ldraw-complete.zip catalog/catalog.json             --release "$LDRAW_RELEASE" --kind official_release             --canonical-url https://library.ldraw.org/library/updates/complete.zip
+          python scripts/validate_catalog.py catalog/catalog.json
+      - name: Unit and integration tests against release catalog
+        run: |
+          python scripts/test_model_schema.py
+          python scripts/test_ldraw_catalog.py
+          python scripts/test_ldraw_export.py
+          python scripts/test_static_model_validation.py
+          python scripts/test_construction_strategy.py
+          python scripts/test_requirement_interpretation.py
+          python scripts/test_failure_handling.py
+          python scripts/test_end_to_end.py
+          python scripts/test_geometry_validation.py
+          python scripts/test_studio_compatibility.py
+      - name: Evals
+        run: python scripts/run_evals.py
+      - name: Final source hygiene
+        run: python scripts/project_hygiene.py --project-root . --mode final
+      - name: Stable release gate
+        run: python scripts/verify_stable_release.py --project-root . --version "${{ steps.version.outputs.value }}"
+      - name: Build distributions from resolved version
+        run: python scripts/build_distributions.py --project-root . --version "${{ steps.version.outputs.value }}" --targets project,chat,custom-gpt
+      - name: Distribution and parity gates
+        shell: bash
+        run: |
+          python scripts/test_custom_gpt_distribution.py
+          python scripts/validate_distributions.py --project-root .
+          VERSION_BACKUP="$(cat VERSION)"
+          printf '%s\n' "${{ steps.version.outputs.value }}" > VERSION
+          python scripts/test_runtime_parity.py --project-root .
+          printf '%s\n' "$VERSION_BACKUP" > VERSION
+          python scripts/verify_release_artifacts.py --project-root . --version "${{ steps.version.outputs.value }}"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lego-modellbyggaren-${{ steps.version.outputs.value }}
+          path: dist/
+          if-no-files-found: error
+      - name: Upload GitHub Release artifacts
+        if: github.event_name == 'release'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "${{ github.event.release.tag_name }}" dist/* --clobber

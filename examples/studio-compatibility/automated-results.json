@@ -1,0 +1,47 @@
+{
+  "suite_version": "1.0",
+  "result": "pass",
+  "cases": [
+    {
+      "id": "01-simple-ldr",
+      "format": "ldr",
+      "expanded_parts": 1,
+      "geometry": "passed",
+      "warnings": 0,
+      "file": "examples/studio-compatibility/01-simple-ldr/model.ldr"
+    },
+    {
+      "id": "02-multicolor-ldr",
+      "format": "ldr",
+      "expanded_parts": 4,
+      "geometry": "passed",
+      "warnings": 0,
+      "file": "examples/studio-compatibility/02-multicolor-ldr/model.ldr"
+    },
+    {
+      "id": "03-submodels-mpd",
+      "format": "mpd",
+      "expanded_parts": 4,
+      "geometry": "passed",
+      "warnings": 0,
+      "file": "examples/studio-compatibility/03-submodels-mpd/model.mpd"
+    },
+    {
+      "id": "04-rotation-ldr",
+      "format": "ldr",
+      "expanded_parts": 2,
+      "geometry": "partial",
+      "warnings": 1,
+      "file": "examples/studio-compatibility/04-rotation-ldr/model.ldr"
+    },
+    {
+      "id": "05-larger-ldr",
+      "format": "ldr",
+      "expanded_parts": 60,
+      "geometry": "passed",
+      "warnings": 0,
+      "file": "examples/studio-compatibility/05-larger-ldr/model.ldr"
+    }
+  ],
+  "failures": []
+}

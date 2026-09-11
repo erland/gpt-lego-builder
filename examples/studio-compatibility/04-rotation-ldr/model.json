@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "model_id": "studio-rotation-001",
+    "name": "Studio rotation LDR",
+    "description": "Stud.io-kompatibilitetstest för LDraw-export.",
+    "status": "validating"
+  },
+  "requirements": {
+    "source_prompt": "Två klossar, en roterad 90 grader.",
+    "design_intent": "Kompatibilitetstest för BrickLink Studio.",
+    "max_parts": 2,
+    "preferred_colors": [
+      4
+    ],
+    "detail_level": "simple",
+    "constraints": [
+      "Endast verifierade delar",
+      "Ortogonala placeringar"
+    ]
+  },
+  "dimensions": {
+    "unit": "LDU",
+    "min": {
+      "x": -100,
+      "y": 0,
+      "z": -100
+    },
+    "max": {
+      "x": 100,
+      "y": 24,
+      "z": 100
+    }
+  },
+  "submodels": [
+    {
+      "id": "main",
+      "name": "Orthogonal rotation",
+      "parts": [
+        {
+          "instance_id": "p001",
+          "ldraw_part": "3001.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": -60,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p002",
+          "ldraw_part": "3001.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": 60,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              0,
+              0,
+              1,
+              0,
+              1,
+              0,
+              -1,
+              0,
+              0
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "schema": "pending",
+    "catalog": "pending",
+    "geometry": "pending",
+    "messages": [
+      "Stud.io-kompatibilitetssvit; statisk gate körs före export."
+    ]
+  }
+}

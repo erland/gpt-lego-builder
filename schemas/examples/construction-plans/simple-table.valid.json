@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "design_goal": "Ett enkelt litet LEGO-bord med fyra ben och plan skiva.",
+  "interpreted_requirements": {
+    "detail_level": "simple",
+    "max_parts": 20,
+    "preferred_colors": [4],
+    "constraints": ["Konservativ studs-up-konstruktion"]
+  },
+  "assumptions": ["Bordet behöver inte ha rörliga delar."],
+  "target_envelope_studs": {"width": 6, "depth": 4, "height": 4},
+  "sections": [
+    {"id": "legs", "purpose": "Fyra bärande ben", "technique": "studs_up", "priority": "structural"},
+    {"id": "top", "purpose": "Plan bordsskiva", "technique": "layered_plate", "priority": "recognition"}
+  ],
+  "assembly_order": ["legs", "top"],
+  "fallback_policy": ["replace_verified_part", "change_dimensions", "simplify_section", "remove_noncritical_detail", "report_unverifiable"]
+}

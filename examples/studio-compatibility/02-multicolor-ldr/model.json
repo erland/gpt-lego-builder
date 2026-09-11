@@ -1,0 +1,174 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "model_id": "studio-colors-001",
+    "name": "Studio multi-color LDR",
+    "description": "Stud.io-kompatibilitetstest för LDraw-export.",
+    "status": "validating"
+  },
+  "requirements": {
+    "source_prompt": "Fyra klossar i olika färger.",
+    "design_intent": "Kompatibilitetstest för BrickLink Studio.",
+    "max_parts": 4,
+    "preferred_colors": [
+      1,
+      2,
+      4,
+      14
+    ],
+    "detail_level": "simple",
+    "constraints": [
+      "Endast verifierade delar",
+      "Ortogonala placeringar"
+    ]
+  },
+  "dimensions": {
+    "unit": "LDU",
+    "min": {
+      "x": -100,
+      "y": 0,
+      "z": -50
+    },
+    "max": {
+      "x": 100,
+      "y": 24,
+      "z": 50
+    }
+  },
+  "submodels": [
+    {
+      "id": "main",
+      "name": "Multi color",
+      "parts": [
+        {
+          "instance_id": "p001",
+          "ldraw_part": "3003.dat",
+          "color": 1,
+          "placement": {
+            "position": {
+              "x": -60,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p002",
+          "ldraw_part": "3003.dat",
+          "color": 2,
+          "placement": {
+            "position": {
+              "x": -20,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p003",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 20,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p004",
+          "ldraw_part": "3003.dat",
+          "color": 14,
+          "placement": {
+            "position": {
+              "x": 60,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "schema": "pending",
+    "catalog": "pending",
+    "geometry": "pending",
+    "messages": [
+      "Stud.io-kompatibilitetssvit; statisk gate körs före export."
+    ]
+  }
+}

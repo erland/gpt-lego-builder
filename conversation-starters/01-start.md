@@ -1,0 +1,3 @@
+- Bygg en liten röd svensk stuga, ungefär 20 × 16 studs.
+- Skapa en kompakt veterantraktor i rött och svart, högst cirka 250 delar.
+- Jag vill bygga en enkel rymdrobot som går att öppna i Stud.io.

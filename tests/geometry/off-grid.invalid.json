@@ -1,0 +1,147 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "model_id": "red-tower-e2e-001",
+    "name": "Rött tretorn",
+    "description": "Första end-to-end-referensmodellen: tre röda Brick 2 x 4 staplade vertikalt.",
+    "status": "validating"
+  },
+  "requirements": {
+    "source_prompt": "Bygg ett litet rött torn av tre vanliga 2 x 4-klossar staplade rakt ovanpå varandra.",
+    "design_intent": "Minimal studs-up-modell som bevisar hela tekniska kedjan.",
+    "max_parts": 3,
+    "preferred_colors": [
+      4
+    ],
+    "target_dimensions_studs": {
+      "width": 4,
+      "depth": 2,
+      "height": 3
+    },
+    "detail_level": "simple",
+    "constraints": [
+      "Endast verifierade delar",
+      "Ortogonala placeringar"
+    ]
+  },
+  "dimensions": {
+    "unit": "LDU",
+    "min": {
+      "x": -40,
+      "y": -72,
+      "z": -20
+    },
+    "max": {
+      "x": 40,
+      "y": 0,
+      "z": 20
+    }
+  },
+  "submodels": [
+    {
+      "id": "main",
+      "name": "Rött tretorn",
+      "description": "Tre 3001.dat i färg 4 (Red).",
+      "parts": [
+        {
+          "instance_id": "p001",
+          "ldraw_part": "3001.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture för end-to-end-test; produktionsgate kräver official_release."
+            ]
+          }
+        },
+        {
+          "instance_id": "p002",
+          "ldraw_part": "3001.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 3,
+              "y": -24,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture för end-to-end-test; produktionsgate kräver official_release."
+            ]
+          }
+        },
+        {
+          "instance_id": "p003",
+          "ldraw_part": "3001.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": -48,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture för end-to-end-test; produktionsgate kräver official_release."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "schema": "pending",
+    "catalog": "pending",
+    "geometry": "pending",
+    "messages": [
+      "Steg 7 referensscenario; statisk gate körs före export."
+    ]
+  }
+}

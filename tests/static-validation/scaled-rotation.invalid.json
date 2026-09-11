@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "model_id": "simple-table-001",
+    "name": "Enkelt bord",
+    "description": "Schemaexempel för en liten modell. Delreferenserna är ännu inte katalogverifierade.",
+    "status": "draft"
+  },
+  "requirements": {
+    "source_prompt": "Bygg ett litet enkelt bord.",
+    "design_intent": "En konservativ, rektangulär bordskonstruktion.",
+    "max_parts": 20,
+    "preferred_colors": [
+      4,
+      15
+    ],
+    "target_dimensions_studs": {
+      "width": 6,
+      "depth": 4,
+      "height": 4
+    },
+    "detail_level": "simple",
+    "constraints": [
+      "Prioritera enkla ortogonala placeringar"
+    ]
+  },
+  "dimensions": {
+    "unit": "LDU",
+    "min": {
+      "x": -60,
+      "y": -96,
+      "z": -40
+    },
+    "max": {
+      "x": 60,
+      "y": 0,
+      "z": 40
+    }
+  },
+  "submodels": [
+    {
+      "id": "main",
+      "name": "Huvudmodell",
+      "description": "Bordsskiva och ben.",
+      "parts": [
+        {
+          "instance_id": "p001",
+          "ldraw_part": "3001.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              2,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "unverified",
+            "placement": "unchecked",
+            "messages": [
+              "Katalogverifiering införs i steg 3."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "schema": "pending",
+    "catalog": "pending",
+    "geometry": "pending",
+    "messages": []
+  }
+}

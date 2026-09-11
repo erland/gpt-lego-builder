@@ -1,0 +1,27 @@
+{
+  "report_version": "1.0",
+  "model_id": "red-tower-e2e-001",
+  "catalog": {
+    "kind": "fixture",
+    "release": "dev-fixture",
+    "fingerprint": "sha256:922ac54c253aef44372fd2a2c6ffe29d8a383ab2fe997cb2266c233a83ae1dbe"
+  },
+  "result": "pass",
+  "checks": {
+    "schema": "passed",
+    "catalog": "passed",
+    "static_structure": "passed",
+    "geometry": "passed"
+  },
+  "statistics": {
+    "errors": 0,
+    "warnings": 0,
+    "findings": 0,
+    "expanded_parts": 3
+  },
+  "findings": [],
+  "limitations": [
+    "Geometry v1 only checks basic Brick/Plate grid alignment and obvious AABB overlaps for unrotated profiled parts; it does not prove connectivity, stability, or full collision freedom.",
+    "Color validation confirms an LDraw color code, not historical availability of a specific part/color combination."
+  ]
+}
