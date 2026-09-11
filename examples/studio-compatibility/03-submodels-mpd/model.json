@@ -1,0 +1,164 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "model_id": "studio-submodels-001",
+    "name": "Studio submodel MPD",
+    "description": "Stud.io-kompatibilitetstest för LDraw-export.",
+    "status": "validating"
+  },
+  "requirements": {
+    "source_prompt": "En huvudmodell med återanvänd submodell.",
+    "design_intent": "Kompatibilitetstest för BrickLink Studio.",
+    "max_parts": 4,
+    "preferred_colors": [
+      4
+    ],
+    "detail_level": "simple",
+    "constraints": [
+      "Endast verifierade delar",
+      "Ortogonala placeringar"
+    ]
+  },
+  "dimensions": {
+    "unit": "LDU",
+    "min": {
+      "x": -100,
+      "y": -48,
+      "z": -100
+    },
+    "max": {
+      "x": 100,
+      "y": 48,
+      "z": 100
+    }
+  },
+  "submodels": [
+    {
+      "id": "main",
+      "name": "Main",
+      "parts": [],
+      "submodel_instances": [
+        {
+          "instance_id": "sm001",
+          "submodel_id": "module",
+          "color": 16,
+          "placement": {
+            "position": {
+              "x": -50,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        {
+          "instance_id": "sm002",
+          "submodel_id": "module",
+          "color": 16,
+          "placement": {
+            "position": {
+              "x": 50,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "module",
+      "name": "Two brick module",
+      "parts": [
+        {
+          "instance_id": "p001",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        },
+        {
+          "instance_id": "p002",
+          "ldraw_part": "3003.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": -24,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "schema": "pending",
+    "catalog": "pending",
+    "geometry": "pending",
+    "messages": [
+      "Stud.io-kompatibilitetssvit; statisk gate körs före export."
+    ]
+  }
+}

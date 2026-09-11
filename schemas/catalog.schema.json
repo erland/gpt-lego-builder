@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/lego-modellbyggaren/schemas/catalog.schema.json",
+  "title": "LEGO Modellbyggaren LDraw part and color catalog index",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source", "statistics", "colors", "parts"],
+  "properties": {
+    "schema_version": {"const": "1.1"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "release", "fingerprint", "kind"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "kind": {"enum": ["official_release", "fixture"]},
+        "release": {"type": "string", "minLength": 1},
+        "fingerprint": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "canonical_url": {"type": "string"}
+      }
+    },
+    "statistics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["indexed_files", "usable_parts", "colors"],
+      "properties": {
+        "indexed_files": {"type": "integer", "minimum": 0},
+        "usable_parts": {"type": "integer", "minimum": 0},
+        "colors": {"type": "integer", "minimum": 1}
+      }
+    },
+    "colors": {
+      "type": "object",
+      "minProperties": 1,
+      "propertyNames": {"pattern": "^(0|[1-9][0-9]*)$"},
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name"],
+        "properties": {"name": {"type": "string", "minLength": 1}}
+      }
+    },
+    "parts": {
+      "type": "object",
+      "propertyNames": {"pattern": "^[a-z0-9][a-z0-9_+.-]*\\.dat$"},
+      "additionalProperties": {"$ref": "#/$defs/partEntry"}
+    }
+  },
+  "$defs": {
+    "partEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "library_type", "qualifiers", "usable_as_model_part"],
+      "properties": {
+        "description": {"type": "string", "minLength": 1},
+        "library_type": {"type": "string", "minLength": 1},
+        "qualifiers": {"type": "array", "items": {"type": "string"}},
+        "usable_as_model_part": {"type": "boolean"}
+      }
+    }
+  }
+}

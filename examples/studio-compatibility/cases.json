@@ -1,0 +1,35 @@
+{
+  "suite_version": "1.0",
+  "cases": [
+    {
+      "id": "01-simple-ldr",
+      "model": "01-simple-ldr/model.json",
+      "expected_format": "ldr",
+      "expected_expanded_parts": 1
+    },
+    {
+      "id": "02-multicolor-ldr",
+      "model": "02-multicolor-ldr/model.json",
+      "expected_format": "ldr",
+      "expected_expanded_parts": 4
+    },
+    {
+      "id": "03-submodels-mpd",
+      "model": "03-submodels-mpd/model.json",
+      "expected_format": "mpd",
+      "expected_expanded_parts": 4
+    },
+    {
+      "id": "04-rotation-ldr",
+      "model": "04-rotation-ldr/model.json",
+      "expected_format": "ldr",
+      "expected_expanded_parts": 2
+    },
+    {
+      "id": "05-larger-ldr",
+      "model": "05-larger-ldr/model.json",
+      "expected_format": "ldr",
+      "expected_expanded_parts": 60
+    }
+  ]
+}

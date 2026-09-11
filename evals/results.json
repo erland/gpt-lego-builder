@@ -1,0 +1,101 @@
+{
+  "schema_version": "1.0",
+  "result": "pass",
+  "statistics": {
+    "total": 8,
+    "passed": 8,
+    "failed": 0
+  },
+  "categories": {
+    "hallucinated_parts": {
+      "passed": 2,
+      "failed": 0
+    },
+    "invalid_ldraw": {
+      "passed": 1,
+      "failed": 0
+    },
+    "requirement_retention": {
+      "passed": 2,
+      "failed": 0
+    },
+    "part_budget": {
+      "passed": 1,
+      "failed": 0
+    },
+    "vague_prompt": {
+      "passed": 1,
+      "failed": 0
+    },
+    "correct_abstention": {
+      "passed": 1,
+      "failed": 0
+    }
+  },
+  "results": [
+    {
+      "id": "EVAL-001",
+      "category": "hallucinated_parts",
+      "required": true,
+      "description": "Unknown part must be rejected by catalog validation",
+      "result": "pass",
+      "detail": "unknown part blocked"
+    },
+    {
+      "id": "EVAL-002",
+      "category": "invalid_ldraw",
+      "required": true,
+      "description": "Reference export must contain only valid type-1 part lines after headers",
+      "result": "pass",
+      "detail": "3 type-1 lines checked"
+    },
+    {
+      "id": "EVAL-003",
+      "category": "requirement_retention",
+      "required": true,
+      "description": "Explicit max parts, color and length must survive interpretation",
+      "result": "pass",
+      "detail": "max_parts/color/depth retained"
+    },
+    {
+      "id": "EVAL-004",
+      "category": "part_budget",
+      "required": true,
+      "description": "Expanded model above max_parts must fail delivery validation",
+      "result": "pass",
+      "detail": "MV400 expected"
+    },
+    {
+      "id": "EVAL-005",
+      "category": "vague_prompt",
+      "required": true,
+      "description": "Vague but usable prompt should get conservative defaults without blocking question",
+      "result": "pass",
+      "detail": "conservative defaults"
+    },
+    {
+      "id": "EVAL-006",
+      "category": "correct_abstention",
+      "required": true,
+      "description": "Unresolvable unknown part must end in report_unverifiable",
+      "result": "pass",
+      "detail": "fail-closed abstention"
+    },
+    {
+      "id": "EVAL-007",
+      "category": "hallucinated_parts",
+      "required": true,
+      "description": "Invented replacement candidate must never be selected or echoed",
+      "result": "pass",
+      "detail": "invented candidate discarded"
+    },
+    {
+      "id": "EVAL-008",
+      "category": "requirement_retention",
+      "required": true,
+      "description": "English display/detail/part-budget/length/color requirements must survive interpretation",
+      "result": "pass",
+      "detail": "English requirements retained"
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+schema_version: 1
+project:
+  id: lego-modellbyggaren
+  name: LEGO Modellbyggaren
+  profile: zip_first_advanced
+instructions:
+  canonical: assistant/instructions.md
+  core_contract:
+    enabled: true
+    required_markers:
+    - VERIFIERADE DELAR ENDAST
+    - STUDIO-KOMPATIBEL EXPORT
+    - INGEN FALSK FYSIKGARANTI
+    required_runtime_dependencies:
+    - schemas/model.schema.json
+    - catalog/catalog.json
+    - schemas/construction-plan.schema.json
+    - schemas/interpreted-request.schema.json
+    max_required_file_hops: 4
+    knowledge_may_not_be_required_for_core_behavior: true
+structure:
+  conversation_starters:
+    path: conversation-starters
+  runtime_policy:
+    path: assistant/policies
+  schemas:
+    path: schemas
+  scripts:
+    path: scripts
+  templates:
+    path: templates
+  catalog:
+    path: catalog
+knowledge_architecture:
+  canonical_root: knowledge
+  custom_gpt:
+    priority: []
+runtime:
+  chat_zip:
+    enabled: true
+    start_here_template: templates/START-HERE.chat.md.tpl
+  custom_gpt:
+    enabled: true
+    instruction:
+      mode: compiled
+      max_characters: 8000
+    knowledge:
+      strategy: prioritize
+      max_files: 20
+    templates:
+      capabilities: templates/capabilities.md.tpl
+      readme: templates/README.custom-gpt.md.tpl
+      compatibility: templates/COMPATIBILITY.md.tpl
+ci:
+  enabled: true
+  workflow: .github/workflows/ci.yml
+release:
+  github:
+    enabled: true
+    workflow: .github/workflows/release.yml

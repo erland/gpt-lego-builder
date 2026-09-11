@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "metadata": {
+    "model_id": "studio-simple-001",
+    "name": "Studio simple LDR",
+    "description": "Stud.io-kompatibilitetstest för LDraw-export.",
+    "status": "validating"
+  },
+  "requirements": {
+    "source_prompt": "En enkel röd 2 x 4-kloss.",
+    "design_intent": "Kompatibilitetstest för BrickLink Studio.",
+    "max_parts": 1,
+    "preferred_colors": [
+      4
+    ],
+    "detail_level": "simple",
+    "constraints": [
+      "Endast verifierade delar",
+      "Ortogonala placeringar"
+    ]
+  },
+  "dimensions": {
+    "unit": "LDU",
+    "min": {
+      "x": -40,
+      "y": 0,
+      "z": -20
+    },
+    "max": {
+      "x": 40,
+      "y": 24,
+      "z": 20
+    }
+  },
+  "submodels": [
+    {
+      "id": "main",
+      "name": "Simple LDR",
+      "parts": [
+        {
+          "instance_id": "p001",
+          "ldraw_part": "3001.dat",
+          "color": 4,
+          "placement": {
+            "position": {
+              "x": 0,
+              "y": 0,
+              "z": 0
+            },
+            "rotation": [
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              1
+            ]
+          },
+          "validation": {
+            "catalog_reference": "verified",
+            "placement": "unchecked",
+            "messages": [
+              "Verifierad mot utvecklingsfixture; release kräver official_release-katalog."
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "schema": "pending",
+    "catalog": "pending",
+    "geometry": "pending",
+    "messages": [
+      "Stud.io-kompatibilitetssvit; statisk gate körs före export."
+    ]
+  }
+}

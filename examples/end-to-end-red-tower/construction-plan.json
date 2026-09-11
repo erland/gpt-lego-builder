@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.0",
+  "design_goal": "Ett kompakt rött torn av tre staplade 2 x 4-klossar.",
+  "interpreted_requirements": {
+    "detail_level": "simple",
+    "max_parts": 3,
+    "preferred_colors": [
+      4
+    ],
+    "constraints": [
+      "Endast verifierade LDraw-delar",
+      "Studs-up",
+      "Ortogonala rotationer"
+    ]
+  },
+  "assumptions": [
+    "Alla tre klossarna har samma orientering och staplas med en brickhöjd mellan delarnas referenspunkter."
+  ],
+  "target_envelope_studs": {
+    "width": 4,
+    "depth": 2,
+    "height": 3
+  },
+  "sections": [
+    {
+      "id": "tower",
+      "purpose": "Tre bärande 2 x 4-klossar staplade vertikalt",
+      "technique": "studs_up",
+      "priority": "structural"
+    }
+  ],
+  "assembly_order": [
+    "tower"
+  ],
+  "fallback_policy": [
+    "replace_verified_part",
+    "change_dimensions",
+    "simplify_section",
+    "report_unverifiable"
+  ]
+}

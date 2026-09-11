@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/lego-modellbyggaren/schemas/interpreted-request.schema.json",
+  "title": "LEGO Modellbyggaren interpreted user request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "source_prompt", "subject", "model_usage", "detail_level", "max_parts", "preferred_colors", "target_envelope_studs", "constraints", "assumptions", "open_questions"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "source_prompt": {"type": "string", "minLength": 1},
+    "subject": {"type": "string", "minLength": 1},
+    "model_usage": {"enum": ["display", "play", "unspecified"]},
+    "detail_level": {"enum": ["simple", "balanced", "detailed"]},
+    "max_parts": {"type": ["integer", "null"], "minimum": 1},
+    "preferred_colors": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ldraw_code", "name", "source"],
+        "properties": {
+          "ldraw_code": {"type": "integer", "minimum": 0},
+          "name": {"type": "string", "minLength": 1},
+          "source": {"enum": ["explicit", "inferred"]}
+        }
+      }
+    },
+    "target_envelope_studs": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "depth", "height", "source"],
+      "properties": {
+        "width": {"type": "number", "exclusiveMinimum": 0},
+        "depth": {"type": "number", "exclusiveMinimum": 0},
+        "height": {"type": "number", "exclusiveMinimum": 0},
+        "source": {"enum": ["explicit", "partially_explicit", "inferred"]}
+      }
+    },
+    "constraints": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "assumptions": {"type": "array", "items": {"type": "string", "minLength": 1}},
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "question", "reason", "blocking"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"},
+          "question": {"type": "string", "minLength": 1},
+          "reason": {"type": "string", "minLength": 1},
+          "blocking": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

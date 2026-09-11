@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/lego-modellbyggaren/schemas/failure-resolution.schema.json",
+  "title": "LEGO Modellbyggaren failure resolution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "status", "source_result", "actions", "delivery_allowed"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "status": {"enum": ["repair_planned", "unverifiable", "no_failure"]},
+    "source_result": {"enum": ["pass", "fail"]},
+    "delivery_allowed": {"type": "boolean"},
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["priority", "action", "reason", "finding_codes"],
+        "properties": {
+          "priority": {"type": "integer", "minimum": 1},
+          "action": {"enum": ["replace_verified_part", "change_dimensions", "simplify_section", "remove_noncritical_detail", "reduce_detail_level", "report_unverifiable"]},
+          "reason": {"type": "string", "minLength": 1},
+          "finding_codes": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+          "replacement_part": {"type": "string", "pattern": "^[^/\\\\]+\\.dat$"}
+        }
+      }
+    },
+    "blocked_part_references": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+    "notes": {"type": "array", "items": {"type": "string"}}
+  }
+}

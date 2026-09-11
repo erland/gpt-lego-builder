@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "cases": [
+    {"id":"EVAL-001","category":"hallucinated_parts","required":true,"description":"Unknown part must be rejected by catalog validation"},
+    {"id":"EVAL-002","category":"invalid_ldraw","required":true,"description":"Reference export must contain only valid type-1 part lines after headers"},
+    {"id":"EVAL-003","category":"requirement_retention","required":true,"description":"Explicit max parts, color and length must survive interpretation"},
+    {"id":"EVAL-004","category":"part_budget","required":true,"description":"Expanded model above max_parts must fail delivery validation"},
+    {"id":"EVAL-005","category":"vague_prompt","required":true,"description":"Vague but usable prompt should get conservative defaults without blocking question"},
+    {"id":"EVAL-006","category":"correct_abstention","required":true,"description":"Unresolvable unknown part must end in report_unverifiable"},
+    {"id":"EVAL-007","category":"hallucinated_parts","required":true,"description":"Invented replacement candidate must never be selected or echoed"},
+    {"id":"EVAL-008","category":"requirement_retention","required":true,"description":"English display/detail/part-budget/length/color requirements must survive interpretation"}
+  ]
+}

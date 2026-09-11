@@ -1,0 +1,17 @@
+schema_version: 1
+source:
+  name: LDraw.org Official Parts Library
+  canonical_download_url: https://library.ldraw.org/library/updates/complete.zip
+  documentation_url: https://library.ldraw.org/updates
+  verified_release: 2026-08
+  verified_at: 2026-09-10
+policy:
+  include_paths:
+    - parts/*.dat
+  exclude_paths:
+    - parts/s/**
+    - p/**
+  allowed_library_types:
+    - Part
+    - Shortcut
+  fail_closed: true

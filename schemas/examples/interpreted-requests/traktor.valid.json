@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "source_prompt": "Bygg en liten röd traktor, ungefär 20 studs lång och max 250 delar.",
+  "subject": "liten röd traktor",
+  "model_usage": "unspecified",
+  "detail_level": "balanced",
+  "max_parts": 250,
+  "preferred_colors": [{"ldraw_code": 4, "name": "Red", "source": "explicit"}],
+  "target_envelope_studs": {"width": 10, "depth": 20, "height": 8, "source": "partially_explicit"},
+  "constraints": ["Max 250 delar."],
+  "assumptions": [
+    "Detaljnivå saknades; balanced används som konservativ standard.",
+    "Ospecificerade dimensioner härleddes från standardprofilen för vehicle."
+  ],
+  "open_questions": []
+}

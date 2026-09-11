@@ -1,0 +1,56 @@
+name: CI
+env:
+  PYTHONDONTWRITEBYTECODE: '1'
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+          cache-dependency-path: scripts/requirements.txt
+      - run: pip install -r scripts/requirements.txt
+      - name: Project lint
+        run: python scripts/lint_gpt_project.py --project-root .
+      - name: Unit and integration tests
+        run: |
+          python scripts/test_model_schema.py
+          python scripts/validate_catalog.py catalog/catalog.json
+          python scripts/test_ldraw_catalog.py
+          python scripts/test_ldraw_export.py
+          python scripts/test_static_model_validation.py
+          python scripts/test_construction_strategy.py
+          python scripts/test_requirement_interpretation.py
+          python scripts/test_failure_handling.py
+          python scripts/test_end_to_end.py
+          python scripts/test_geometry_validation.py
+          python scripts/test_studio_compatibility.py
+      - name: Evals
+        run: python scripts/run_evals.py
+      - name: Source hygiene
+        run: python scripts/project_hygiene.py --project-root . --mode checkpoint
+      - name: Build clean CI distributions
+        run: python scripts/build_distributions.py --project-root . --version 0.16.0-ci --targets project,chat,custom-gpt
+      - name: Distribution quality gates
+        run: |
+          python scripts/test_custom_gpt_distribution.py
+          python scripts/validate_distributions.py --project-root .
+          VERSION_BACKUP="$(cat VERSION)"
+          printf '0.16.0-ci\n' > VERSION
+          python scripts/test_runtime_parity.py --project-root .
+          printf '%s\n' "$VERSION_BACKUP" > VERSION
+          python scripts/verify_release_artifacts.py --project-root . --version 0.16.0-ci
+      - name: Workflow contract tests
+        run: python scripts/test_ci_release_workflows.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: lego-modellbyggaren-ci-distributions
+          path: dist/
+          if-no-files-found: error
