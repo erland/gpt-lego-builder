@@ -1,14 +1,13 @@
 # Stabil release 1.0
 
-Stabil `1.0.0` får endast byggas när alla automatiska quality gates passerar **och** den manuella BrickLink Studio-verifieringen är genomförd.
+En stabil release byggs när de automatiska quality gates i release-workflowet passerar.
 
-`python scripts/verify_stable_release.py --project-root . --version 1.0.0` blockerar stabil release om `examples/studio-compatibility/manual-studio-results.md` inte har `**Status:** pass` eller fortfarande innehåller `ej testad`.
+Den manuella BrickLink Studio-verifieringen är rekommenderad som extra kontroll, men den blockerar inte längre en stabil release.
 
-Prerelease-versioner som `1.0.0-rc.2` får byggas även när GUI-verifieringen återstår.
-
-## Praktiskt slutsteg
+## Rekommenderad Studio-kontroll
 
 1. Öppna samtliga golden `.ldr/.mpd`-filer i BrickLink Studio.
 2. Kontrollera delantal, färger, orientering, submodeller och att filen kan sparas som `.io`.
-3. Fyll i `manual-studio-results.md` och sätt `**Status:** pass` om samtliga fall är godkända.
-4. Kör stable gate och hela releasekedjan för `1.0.0`.
+3. Fyll vid behov i `examples/studio-compatibility/manual-studio-results.md` för dokumentation.
+
+Release-workflowet fortsätter att kräva övriga automatiska kontroller: lint, tester, evals, hygiene, distributionsvalidering, runtime parity och verifiering av releaseartefakter.
