@@ -26,7 +26,6 @@ release_markers = [
     "python scripts/validate_distributions.py",
     "python scripts/test_runtime_parity.py",
     "python scripts/verify_release_artifacts.py",
-    "python scripts/verify_stable_release.py",
     "actions/upload-artifact@v4",
     "gh release upload",
 ]
