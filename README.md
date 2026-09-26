@@ -4,7 +4,7 @@ Ett GPT-projekt för att skapa verifierade LDraw-kompatibla LEGO-modeller från 
 
 ## Status
 
-Steg 8 av 18 är genomfört. Projektet har nu hela kedjan från textkrav till verifierad LDraw-export samt konservativ geometrivalidering för enkla Brick/Plate-delar. Nästa steg är systematisk Stud.io-kompatibilitet.
+Produktplanen är **18/18 complete**. Version **1.0.0-rc.2** är release candidate och alla automatiserade quality gates är gröna. Stabil **1.0.0** är fortsatt blockerad tills den manuella BrickLink Studio GUI-verifieringen har status `pass`. Migreringen till GPT Byggaren **1.5.0** är genomförd utan att ändra detta releasebeslut.
 
 ## Viktiga filer
 
@@ -25,7 +25,7 @@ En slutfil ska exporteras genom `export_validated_model.py`. Den vägen skapar i
 
 ## Distributioner
 
-Projektet är strukturerat för både Chat ZIP och Custom GPT. Funktionell runtime-paritet valideras i senare steg.
+Aktiva distributioner är Chat ZIP, Custom GPT, Claude Projects och OpenCode. Runtime-set och release-artifacts härleds från `runtime-distribution-registry.yaml`. OpenAI Plugin är bedömd som reducerad/advisory-only och är inte ett aktivt distributionsmål.
 
 ## Del- och färgkatalog
 
@@ -68,4 +68,4 @@ Chat ZIP och Custom GPT byggs från samma canonical beteendekontrakt. Chat-versi
 
 ## CI och release
 
-CI och releasebygge beskrivs i `docs/ci-and-release.md`. Releaseflödet kan även köras manuellt som testrelease och producerar versionsmärkta projekt-, Chat- och Custom GPT-ZIP:ar med SHA-256-checksummor och leveransmanifest.
+CI och releasebygge beskrivs i `docs/ci-and-release.md`. Releaseflödet kan även köras manuellt som testrelease och producerar versionsmärkta projekt- och runtime-ZIP:ar för samtliga aktiva mål i `runtime-distribution-registry.yaml`, tillsammans med SHA-256-checksummor och leveransmanifest.
