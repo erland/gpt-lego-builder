@@ -45,3 +45,7 @@ Den lokala projektkällan använder en minimal fixture-katalog för reproducerba
 **READY FOR RC: YES**
 
 **READY FOR STABLE 1.0: NO – stable-release gate blocks until manual BrickLink Studio GUI verification has status `pass`.**
+
+## GPT Byggaren 1.5.0
+
+Migreringen är 9/9 komplett. Runtime-registryt är source of truth för aktiva distributioner. Detta ändrar inte releasebeslutet: stabil 1.0.0 kräver fortfarande manuell BrickLink Studio GUI-verifiering med status `pass`.
