@@ -16,7 +16,7 @@ migration:
 
 progress:
   current_step: 9
-  last_completed_step: 8
+  last_completed_step: 9
   completed_steps:
     - 1
     - 2
@@ -26,14 +26,14 @@ progress:
     - 6
     - 7
     - 8
+    - 9
   skipped_steps: []
   inserted_steps: []
 
 state:
-  overall: warning
+  overall: pass
   blocking_issues: []
-  warnings:
-    - "Stable-release-dokumentationen är intern motsägelsefull och ska lösas i steg 9 utan att ändra manuell Stud.io-status."
+  warnings: []
 
 preservation:
   canonical_instruction: assistant/instructions.md
@@ -55,14 +55,14 @@ stable_release:
   migration_may_set_pass: false
   migration_may_unblock_stable_release: false
   documentation_conflict:
-    blocking_sources:
+    status: resolved
+    resolution_step: 9
+    canonical_policy: manual_studio_pass_required_for_stable_1_0
+    aligned_sources:
       - project-status.yaml
       - STATUS.md
       - docs/release-readiness.md
-    non_blocking_source:
       - docs/stable-release.md
-    resolution_step: 9
-    interim_policy: preserve_blocking_interpretation
 
 runtime_baseline:
   active:
@@ -199,9 +199,20 @@ runtime_activation:
   release_build_updated: true
   ci_passed: true
 
-next_step:
-  recommended: 9
-  title: Slutlig readiness och dokumentationssynk
-  reason: "Build, parity, CI och release härleder nu runtime-set och release-artifacts från runtime-distribution-registry.yaml utan hårdkodade runtime-listor, samtidigt som official LDraw- och stable-release-gates är bevarade."
+final_readiness:
+  status: ready_for_merge_after_ci
+  migration_steps_complete: 9
+  migration_steps_total: 9
+  final_gate: scripts/validate_gpt_builder_1_5_migration.py
+  canonical_behavior_preserved: true
+  product_plan_18_18_preserved: true
+  version_1_0_0_rc_2_preserved: true
+  manual_studio_status_preserved: not_run
+  stable_release_remains_blocked: true
 
-human_readable_status: "Steg 1–8 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+next_step:
+  recommended: null
+  title: Migration complete
+  reason: "GPT Byggaren 1.5.0-migreringen är 9/9 komplett. Nästa produktåtgärd är fortfarande extern BrickLink Studio GUI-verifiering före stabil 1.0.0."
+
+human_readable_status: "Steg 1–9 av 9 i GPT Byggaren 1.5.0-migreringen är klara. Väntar endast på grön CI för merge-readiness."
