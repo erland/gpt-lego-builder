@@ -27,6 +27,23 @@ def load_config(root: Path) -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
+def load_registry(root: Path) -> dict:
+    path = root / "runtime-distribution-registry.yaml"
+    if not path.exists():
+        raise SystemExit(f"Missing runtime registry: {path}")
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
+
+
+def registry_targets(root: Path) -> list[str]:
+    registry = load_registry(root)
+    targets = list(registry.get("active_targets", []) or [])
+    if registry.get("release", {}).get("include_project_artifact") is True:
+        targets = ["project", *targets]
+    if not targets:
+        raise SystemExit("Runtime registry has no active build targets")
+    return targets
+
+
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as f:
@@ -615,7 +632,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project-root", default=".")
     parser.add_argument("--version", default=None)
-    parser.add_argument("--targets", default="project,chat,custom-gpt")
+    parser.add_argument("--targets", default=None, help="Comma-separated override; defaults to project + registry active_targets")
     args = parser.parse_args()
 
     root = Path(args.project_root).resolve()
@@ -627,7 +644,8 @@ def main() -> int:
     ensure_clean_dir(build_root)
     ensure_clean_dir(dist)
 
-    targets = {t.strip() for t in args.targets.split(",") if t.strip()}
+    selected = registry_targets(root) if args.targets is None else [t.strip() for t in args.targets.split(",") if t.strip()]
+    targets = set(selected)
     project_id = cfg["project"]["id"]
     if args.version:
         version = args.version.strip()
