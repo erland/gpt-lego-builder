@@ -22,6 +22,9 @@ jobs:
 
       - name: Validate GPT Builder 1.5 canonical contract
         run: python scripts/validate_gpt_builder_1_5_contract.py
+
+      - name: Validate GPT Builder 1.5 runtime registry
+        run: python scripts/validate_runtime_distribution_registry.py
       - name: Unit and integration tests
         run: |
           python scripts/test_model_schema.py
