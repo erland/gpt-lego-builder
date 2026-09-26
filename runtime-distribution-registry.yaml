@@ -1,0 +1,79 @@
+schema_version: 1
+registry_id: lego-modellbyggaren-runtime-distributions
+builder_contract:
+  target_version: 1.5.0
+  normalized_contract: gpt-builder-1.5-contract.yaml
+  project_contract: gpt-project.yaml
+  runtime_selection: active_targets
+  artifact_policy: exact_active_target_set
+  version_source:
+    local: VERSION
+    ci: explicit_build_argument
+    release: github_release_or_manual_input
+
+active_targets:
+  - chat
+  - custom-gpt
+  - claude
+  - opencode
+
+planned_targets: []
+
+inactive_targets:
+  openai_plugin:
+    status: assessed_not_active
+    compatibility: reduced
+    advisory_only: true
+    assessment: docs/openai-plugin-compatibility.md
+    blockers:
+      - persistent_workspace_state_not_guaranteed
+      - deterministic_local_validation_not_guaranteed
+      - fail_closed_artifact_generation_not_guaranteed
+
+project_artifact:
+  id: project
+  artifact_pattern: lego-modellbyggaren-project-{version}.zip
+
+targets:
+  chat:
+    status: active
+    runtime_id: chatgpt_chat
+    runtime_key: chat_zip
+    builder: chat
+    artifact_pattern: lego-modellbyggaren-chat-{version}.zip
+    compatibility: equivalent_runtime_dependent
+  custom-gpt:
+    status: active
+    runtime_id: chatgpt_custom
+    runtime_key: custom_gpt
+    builder: custom_gpt
+    artifact_pattern: lego-modellbyggaren-custom-gpt-{version}.zip
+    compatibility: equivalent_with_platform_constraints
+  claude:
+    status: active
+    runtime_id: claude_project
+    runtime_key: claude
+    builder: claude
+    artifact_pattern: lego-modellbyggaren-claude-{version}.zip
+    compatibility: reduced
+  opencode:
+    status: active
+    runtime_id: opencode
+    runtime_key: opencode
+    builder: opencode
+    artifact_pattern: lego-modellbyggaren-opencode-{version}.zip
+    compatibility: equivalent
+
+derived_artifacts:
+  checksums: SHA256SUMS.txt
+  manifest: DELIVERY-MANIFEST.json
+
+release:
+  runtime_assets_from: active_targets
+  include_project_artifact: true
+  include_derived_artifacts:
+    - checksums
+    - manifest
+  wildcard_runtime_selection: false
+  preserve_official_ldraw_catalog_build: true
+  preserve_stable_release_gate: true

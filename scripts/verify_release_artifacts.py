@@ -6,6 +6,8 @@ import hashlib
 import json
 from pathlib import Path
 
+import yaml
+
 
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
@@ -26,20 +28,28 @@ def parse_sums(path: Path) -> dict[str, str]:
     return result
 
 
+def expected_zip_names(root: Path, version: str) -> set[str]:
+    registry = yaml.safe_load((root / "runtime-distribution-registry.yaml").read_text(encoding="utf-8"))
+    expected: set[str] = set()
+    if registry.get("release", {}).get("include_project_artifact") is True:
+        expected.add(registry["project_artifact"]["artifact_pattern"].format(version=version))
+    for target in registry.get("active_targets", []) or []:
+        entry = registry["targets"][target]
+        if entry.get("status") != "active":
+            raise SystemExit(f"Registry target {target!r} is listed active but status is {entry.get('status')!r}")
+        expected.add(entry["artifact_pattern"].format(version=version))
+    return expected
+
+
 def main() -> int:
-    ap = argparse.ArgumentParser(description="Verify complete release artifact set, checksums and manifest")
+    ap = argparse.ArgumentParser(description="Verify registry-derived release artifact set, checksums and manifest")
     ap.add_argument("--project-root", default=".")
     ap.add_argument("--version", required=True)
     args = ap.parse_args()
 
     root = Path(args.project_root).resolve()
     dist = root / "dist"
-    project_id = "lego-modellbyggaren"
-    expected_zips = {
-        f"{project_id}-project-{args.version}.zip",
-        f"{project_id}-chat-{args.version}.zip",
-        f"{project_id}-custom-gpt-{args.version}.zip",
-    }
+    expected_zips = expected_zip_names(root, args.version)
     errors: list[str] = []
 
     actual_zips = {p.name for p in dist.glob("*.zip")}

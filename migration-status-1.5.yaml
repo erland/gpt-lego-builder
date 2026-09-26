@@ -1,0 +1,218 @@
+schema_version: 1
+project:
+  id: lego-modellbyggaren
+  name: LEGO Modellbyggaren
+  product_plan:
+    status: complete
+    completed_step: 18
+    total_steps: 18
+  version: 1.0.0-rc.2
+
+migration:
+  target_builder_version: 1.5.0
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.5-runtime-migration.md
+  total_steps: 9
+
+progress:
+  current_step: 9
+  last_completed_step: 9
+  completed_steps:
+    - 1
+    - 2
+    - 3
+    - 4
+    - 5
+    - 6
+    - 7
+    - 8
+    - 9
+  skipped_steps: []
+  inserted_steps: []
+
+state:
+  overall: pass
+  blocking_issues: []
+  warnings: []
+
+preservation:
+  canonical_instruction: assistant/instructions.md
+  project_contract: gpt-project.yaml
+  product_status: project-status.yaml
+  version_file: VERSION
+  preserve_product_plan_18_18: true
+  preserve_version_1_0_0_rc_2: true
+  preserve_fail_closed_validation: true
+  preserve_verified_parts_only: true
+  preserve_no_false_physics_guarantee: true
+  preserve_official_ldraw_release_gate: true
+  preserve_existing_tests_evals: true
+
+stable_release:
+  current_project_status: blocked
+  manual_studio_result_file: examples/studio-compatibility/manual-studio-results.md
+  manual_studio_status: not_run
+  migration_may_set_pass: false
+  migration_may_unblock_stable_release: false
+  documentation_conflict:
+    status: resolved
+    resolution_step: 9
+    canonical_policy: manual_studio_pass_required_for_stable_1_0
+    aligned_sources:
+      - project-status.yaml
+      - STATUS.md
+      - docs/release-readiness.md
+      - docs/stable-release.md
+
+runtime_baseline:
+  active:
+    - chat
+    - custom-gpt
+  planned:
+    - claude
+    - opencode
+  intended_compatibility:
+    chat: equivalent_runtime_dependent
+    custom-gpt: equivalent_with_platform_constraints
+    claude: reduced
+    opencode: equivalent
+  openai_plugin:
+    status: assessed_not_active
+    intended_target: reduced
+    advisory_only: true
+    assessment: docs/openai-plugin-compatibility.md
+
+gpt_builder_1_5:
+  normalized_contract: gpt-builder-1.5-contract.yaml
+  validation: scripts/validate_gpt_builder_1_5_contract.py
+  canonical_instruction: assistant/instructions.md
+  product_plan_18_18_preserved: true
+  version_1_0_0_rc_2_preserved: true
+  fail_closed_export_preserved: true
+  official_ldraw_release_policy_preserved: true
+  manual_studio_status: not_run
+  stable_release_unblocked: false
+  ci_passed: true
+
+registry:
+  source_of_truth: runtime-distribution-registry.yaml
+  validation: scripts/validate_runtime_distribution_registry.py
+  builder_target_version: 1.5.0
+  active_targets:
+    - chat
+    - custom-gpt
+  planned_targets:
+    - claude
+    - opencode
+  artifact_policy: exact_active_target_set
+  release_assets_from: active_targets
+  wildcard_runtime_selection: false
+  preserve_official_ldraw_catalog_build: true
+  preserve_stable_release_gate: true
+  ci_passed: true
+
+chat_verification:
+  validation: scripts/validate_chat_gpt_builder_1_5.py
+  status: passed
+  canonical_instruction_byte_identical: true
+  authoritative_catalog_packaged: true
+  required_schemas_packaged: true
+  deterministic_validator_packaged: true
+  fail_closed_export_packaged: true
+  fixture_non_production_constraint_preserved: true
+  development_content_leak: false
+  ci_passed: true
+
+custom_gpt_verification:
+  instruction_source: assistant/instructions.custom-gpt.md
+  compiled_instruction_chars: 5084
+  instruction_budget_max: 8000
+  behavior_markers_preserved: true
+  authoritative_catalog_in_knowledge: true
+  critical_schemas_in_knowledge: true
+  code_interpreter_required: true
+  execution_parity: reduced
+  unrun_verification_explicit: true
+  false_pass_forbidden: true
+  false_file_delivery_claim_forbidden: true
+  existing_distribution_gate_passed: true
+  ci_passed: true
+
+claude_verification:
+  validation: scripts/validate_claude_opencode_gpt_builder_1_5.py
+  status: passed
+  compatibility: reduced
+  canonical_instruction: true
+  authoritative_catalog_reference: true
+  critical_schemas_reference: true
+  embedded_local_tools: false
+  deterministic_validation_claimed: false
+  conversation_authoritative: false
+
+opencode_verification:
+  validation: scripts/validate_claude_opencode_gpt_builder_1_5.py
+  status: passed
+  compatibility: equivalent
+  workspace_first: true
+  authoritative_catalog_packaged: true
+  critical_schemas_packaged: true
+  deterministic_validator_packaged: true
+  fail_closed_export_packaged: true
+  bash_permission: ask
+  edit_permission: ask
+  conversation_authoritative: false
+
+plugin_assessment:
+  status: passed
+  runtime: openai_plugin
+  compatibility: reduced
+  activation: not_active
+  advisory_only: true
+  assessment: docs/openai-plugin-compatibility.md
+  reasons:
+    - persistent_workspace_state_not_guaranteed
+    - deterministic_local_validation_not_guaranteed
+    - fail_closed_artifact_generation_not_guaranteed
+  canonical_behavior_changed: false
+  stable_release_unblocked: false
+
+generalized_runtime_pipeline:
+  status: passed
+  registry_is_source_of_truth: true
+  build_targets_derived_from_registry: true
+  parity_active_targets_derived_from_registry: true
+  release_artifacts_derived_from_registry: true
+  ci_runtime_list_hardcoded: false
+  release_runtime_list_hardcoded: false
+  official_ldraw_release_gate_preserved: true
+  stable_release_gate_preserved: true
+
+runtime_activation:
+  active_targets:
+    - chat
+    - custom-gpt
+    - claude
+    - opencode
+  planned_targets: []
+  release_artifact_verifier_updated: true
+  ci_build_updated: true
+  release_build_updated: true
+  ci_passed: true
+
+final_readiness:
+  status: ready_for_merge_after_ci
+  migration_steps_complete: 9
+  migration_steps_total: 9
+  final_gate: scripts/validate_gpt_builder_1_5_migration.py
+  canonical_behavior_preserved: true
+  product_plan_18_18_preserved: true
+  version_1_0_0_rc_2_preserved: true
+  manual_studio_status_preserved: not_run
+  stable_release_remains_blocked: true
+
+next_step:
+  recommended: null
+  title: Migration complete
+  reason: "GPT Byggaren 1.5.0-migreringen är 9/9 komplett. Nästa produktåtgärd är fortfarande extern BrickLink Studio GUI-verifiering före stabil 1.0.0."
+
+human_readable_status: "Steg 1–9 av 9 i GPT Byggaren 1.5.0-migreringen är klara. Väntar endast på grön CI för merge-readiness."

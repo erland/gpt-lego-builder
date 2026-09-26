@@ -11,3 +11,7 @@ Alla automatiserade quality gates är gröna. Stabil-release-gaten är nu maskin
 ## Återstående externa kontroll
 
 Golden-filerna måste öppnas i en faktisk BrickLink Studio-installation och `examples/studio-compatibility/manual-studio-results.md` fyllas i. Den här miljön kan inte starta BrickLink Studio, därför märks ingen oprövad build som stabil `1.0.0`.
+
+## GPT Byggaren 1.5.0
+
+Migreringen är 9/9 komplett. Chat, Custom GPT, Claude Projects och OpenCode är aktiva distributionsmål. OpenAI Plugin är bedömd som reducerad/advisory-only och är inte aktiv. Stable-release-gaten är oförändrad.

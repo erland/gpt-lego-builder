@@ -19,6 +19,12 @@ jobs:
       - run: pip install -r scripts/requirements.txt
       - name: Project lint
         run: python scripts/lint_gpt_project.py --project-root .
+
+      - name: Validate GPT Builder 1.5 canonical contract
+        run: python scripts/validate_gpt_builder_1_5_contract.py
+
+      - name: Validate GPT Builder 1.5 runtime registry
+        run: python scripts/validate_runtime_distribution_registry.py
       - name: Unit and integration tests
         run: |
           python scripts/test_model_schema.py
@@ -37,7 +43,7 @@ jobs:
       - name: Source hygiene
         run: python scripts/project_hygiene.py --project-root . --mode checkpoint
       - name: Build clean CI distributions
-        run: python scripts/build_distributions.py --project-root . --version 0.16.0-ci --targets project,chat,custom-gpt
+        run: python scripts/build_distributions.py --project-root . --version 0.16.0-ci
       - name: Distribution quality gates
         run: |
           python scripts/test_custom_gpt_distribution.py
@@ -47,8 +53,17 @@ jobs:
           python scripts/test_runtime_parity.py --project-root .
           printf '%s\n' "$VERSION_BACKUP" > VERSION
           python scripts/verify_release_artifacts.py --project-root . --version 0.16.0-ci
+
+      - name: Validate GPT Builder 1.5 Chat distribution
+        run: python scripts/validate_chat_gpt_builder_1_5.py --artifact dist/lego-modellbyggaren-chat-0.16.0-ci.zip
+
+      - name: Validate GPT Builder 1.5 Claude and OpenCode
+        run: |
+          python scripts/validate_claude_opencode_gpt_builder_1_5.py             --claude dist/lego-modellbyggaren-claude-0.16.0-ci.zip             --opencode dist/lego-modellbyggaren-opencode-0.16.0-ci.zip
       - name: Workflow contract tests
         run: python scripts/test_ci_release_workflows.py
+      - name: Final GPT Builder 1.5 migration gate
+        run: python scripts/validate_gpt_builder_1_5_migration.py
       - uses: actions/upload-artifact@v4
         with:
           name: lego-modellbyggaren-ci-distributions

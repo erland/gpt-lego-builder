@@ -27,6 +27,23 @@ def load_config(root: Path) -> dict:
     return yaml.safe_load(path.read_text(encoding="utf-8"))
 
 
+def load_registry(root: Path) -> dict:
+    path = root / "runtime-distribution-registry.yaml"
+    if not path.exists():
+        raise SystemExit(f"Missing runtime registry: {path}")
+    return yaml.safe_load(path.read_text(encoding="utf-8"))
+
+
+def registry_targets(root: Path) -> list[str]:
+    registry = load_registry(root)
+    targets = list(registry.get("active_targets", []) or [])
+    if registry.get("release", {}).get("include_project_artifact") is True:
+        targets = ["project", *targets]
+    if not targets:
+        raise SystemExit("Runtime registry has no active build targets")
+    return targets
+
+
 def sha256(path: Path) -> str:
     h = hashlib.sha256()
     with path.open("rb") as f:
@@ -283,9 +300,11 @@ def build_custom(root: Path, cfg: dict, build_root: Path, version: str) -> Path:
     kp = builder / "knowledge-package"
     kp.mkdir(parents=True)
 
-    instr = (root / cfg["instructions"]["canonical"]).read_text(encoding="utf-8")
-    max_chars = int(cfg["runtime"]["custom_gpt"]["instruction"]["max_characters"])
-    mode = cfg["runtime"]["custom_gpt"]["instruction"]["mode"]
+    instruction_cfg = cfg["runtime"]["custom_gpt"]["instruction"]
+    instruction_source = instruction_cfg.get("source", cfg["instructions"]["canonical"])
+    instr = (root / instruction_source).read_text(encoding="utf-8")
+    max_chars = int(instruction_cfg["max_characters"])
+    mode = instruction_cfg["mode"]
     core_markers = list(cfg.get("instructions", {}).get("core_contract", {}).get("required_markers", []) or [])
     compiled_instr = compile_custom_instruction(instr, mode, max_chars, core_markers)
     (builder / "instructions.md").write_text(compiled_instr, encoding="utf-8")
@@ -420,6 +439,135 @@ def build_custom(root: Path, cfg: dict, build_root: Path, version: str) -> Path:
     return out
 
 
+
+def _copy_runtime_reference_files(root: Path, out: Path) -> None:
+    refs = [
+        "catalog/catalog.json",
+        "catalog/source.yaml",
+        "schemas/model.schema.json",
+        "schemas/construction-plan.schema.json",
+        "schemas/interpreted-request.schema.json",
+        "schemas/failure-resolution.schema.json",
+        "docs/construction-strategy.md",
+        "docs/requirement-interpretation.md",
+        "docs/static-validation.md",
+        "docs/geometry-validation.md",
+        "docs/failure-handling.md",
+        "docs/ldraw-export.md",
+        "docs/studio-compatibility.md",
+    ]
+    for rel in refs:
+        src = root / rel
+        if src.exists():
+            copy_file(src, out / "reference" / rel)
+
+
+def build_claude(root: Path, cfg: dict, build_root: Path, version: str) -> Path:
+    out = build_root / "claude"
+    ensure_clean_dir(out)
+    project = out / "project"
+    project.mkdir(parents=True)
+    copy_file(root / cfg["instructions"]["canonical"], project / "instructions.md")
+    _copy_runtime_reference_files(root, project)
+    contract = {
+        "schema_version": 1,
+        "runtime_id": "claude_project",
+        "compatibility": "reduced",
+        "embedded_local_tools": False,
+        "authoritative_catalog": "project/reference/catalog/catalog.json",
+        "state_authority": "project-status.yaml",
+        "conversation_authoritative": False,
+        "validation": {
+            "deterministic_scripts_embedded": False,
+            "unrun_verification_is_pass": False,
+            "must_not_claim_verified_without_actual_validation": True,
+            "must_not_claim_file_created_without_actual_file": True,
+        },
+    }
+    (project / "runtime-contract.json").write_text(
+        json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    readme = (
+        "# LEGO Modellbyggaren – Claude Projects\n\n"
+        "Claude-projektionen bevarar canonical instruktion och referensmaterial, men har reducerad execution parity.\n\n"
+        "Lokala validator-script är inte inbäddade. Om katalog- eller modellvalidering inte faktiskt kan köras får resultatet inte beskrivas som verifierat.\n"
+    )
+    (out / "README.md").write_text(readme, encoding="utf-8")
+    (out / "VERSION").write_text(version + "\n", encoding="utf-8")
+    write_manifest(out, cfg["project"]["id"] + "-claude", version, "project/instructions.md")
+    return out
+
+
+def build_opencode(root: Path, cfg: dict, build_root: Path, version: str) -> Path:
+    out = build_root / "opencode"
+    ensure_clean_dir(out)
+    canonical = (root / cfg["instructions"]["canonical"]).read_text(encoding="utf-8")
+    agents = canonical.rstrip() + (
+        "\n\n## OpenCode adapter\n\n"
+        "- Work inside the current workspace.\n"
+        "- Use the packaged authoritative catalog and schemas.\n"
+        "- Run packaged validator/export scripts before claiming a model is verified or exported.\n"
+        "- Never treat an unrun check as PASS.\n"
+        "- Ask before shell commands that mutate workspace files.\n"
+    )
+    (out / "AGENTS.md").write_text(agents + "\n", encoding="utf-8")
+    _copy_runtime_reference_files(root, out)
+
+    scripts_target = out / ".opencode" / "runtime-scripts"
+    scripts_target.mkdir(parents=True, exist_ok=True)
+    for name in [
+        "requirements.txt",
+        "ldraw_catalog.py",
+        "geometry_validation.py",
+        "model_validation.py",
+        "ldraw_export.py",
+        "export_validated_model.py",
+        "validate_model.py",
+        "validate_catalog.py",
+        "interpret_requirements.py",
+        "failure_handling.py",
+    ]:
+        src = root / "scripts" / name
+        if src.exists():
+            copy_file(src, scripts_target / name)
+
+    config = {
+        "$schema": "https://opencode.ai/config.json",
+        "permission": {"bash": "ask", "edit": "ask"},
+    }
+    (out / "opencode.json").write_text(
+        json.dumps(config, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    contract = {
+        "schema_version": 1,
+        "runtime_id": "opencode",
+        "compatibility": "equivalent",
+        "workspace_first": True,
+        "authoritative_catalog": "reference/catalog/catalog.json",
+        "state_authority": "project-status.yaml",
+        "conversation_authoritative": False,
+        "validation": {
+            "validator_script": ".opencode/runtime-scripts/validate_model.py",
+            "export_script": ".opencode/runtime-scripts/export_validated_model.py",
+            "fail_closed": True,
+            "unrun_verification_is_pass": False,
+        },
+    }
+    contract_path = out / ".opencode" / "lego-modellbyggaren-runtime.json"
+    contract_path.parent.mkdir(parents=True, exist_ok=True)
+    contract_path.write_text(
+        json.dumps(contract, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+    )
+    readme = (
+        "# LEGO Modellbyggaren – OpenCode\n\n"
+        "OpenCode-paketet innehåller canonical instruktion, katalog/schemas och deterministiska validator/export-script för workspace-baserad användning.\n"
+    )
+    (out / "README.md").write_text(readme, encoding="utf-8")
+    (out / "VERSION").write_text(version + "\n", encoding="utf-8")
+    write_manifest(out, cfg["project"]["id"] + "-opencode", version, "AGENTS.md")
+    return out
+
+
 def project_files(root: Path) -> list[Path]:
     excluded_top = {"build", "dist", ".git"}
     result = []
@@ -484,7 +632,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--project-root", default=".")
     parser.add_argument("--version", default=None)
-    parser.add_argument("--targets", default="project,chat,custom-gpt")
+    parser.add_argument("--targets", default=None, help="Comma-separated override; defaults to project + registry active_targets")
     args = parser.parse_args()
 
     root = Path(args.project_root).resolve()
@@ -496,7 +644,8 @@ def main() -> int:
     ensure_clean_dir(build_root)
     ensure_clean_dir(dist)
 
-    targets = {t.strip() for t in args.targets.split(",") if t.strip()}
+    selected = registry_targets(root) if args.targets is None else [t.strip() for t in args.targets.split(",") if t.strip()]
+    targets = set(selected)
     project_id = cfg["project"]["id"]
     if args.version:
         version = args.version.strip()
@@ -517,6 +666,16 @@ def main() -> int:
         custom_root = build_custom(root, cfg, build_root, version)
         custom_zip = dist / f"{project_id}-custom-gpt-{version}.zip"
         stable_write_zip(custom_zip, custom_root, [p for p in custom_root.rglob("*") if p.is_file()])
+
+    if "claude" in targets and cfg.get("runtime", {}).get("claude", {}).get("enabled"):
+        claude_root = build_claude(root, cfg, build_root, version)
+        claude_zip = dist / f"{project_id}-claude-{version}.zip"
+        stable_write_zip(claude_zip, claude_root, [p for p in claude_root.rglob("*") if p.is_file()])
+
+    if "opencode" in targets and cfg.get("runtime", {}).get("opencode", {}).get("enabled"):
+        opencode_root = build_opencode(root, cfg, build_root, version)
+        opencode_zip = dist / f"{project_id}-opencode-{version}.zip"
+        stable_write_zip(opencode_zip, opencode_root, [p for p in opencode_root.rglob("*") if p.is_file()])
 
     if "project" in targets:
         project_zip = dist / f"{project_id}-project-{version}.zip"

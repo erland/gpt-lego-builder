@@ -86,6 +86,46 @@ def validate_custom(root: Path, cfg: dict) -> list[str]:
     return errors
 
 
+
+def validate_claude(root: Path, cfg: dict) -> list[str]:
+    errors = []
+    build = root / "build" / "claude"
+    required = [
+        build / "README.md",
+        build / "VERSION",
+        build / "MANIFEST.json",
+        build / "project" / "instructions.md",
+        build / "project" / "runtime-contract.json",
+        build / "project" / "reference" / "catalog" / "catalog.json",
+        build / "project" / "reference" / "schemas" / "model.schema.json",
+    ]
+    for p in required:
+        if not p.exists():
+            errors.append(f"Missing Claude file: {p.relative_to(build)}")
+    return errors
+
+
+def validate_opencode(root: Path, cfg: dict) -> list[str]:
+    errors = []
+    build = root / "build" / "opencode"
+    required = [
+        build / "README.md",
+        build / "VERSION",
+        build / "MANIFEST.json",
+        build / "AGENTS.md",
+        build / "opencode.json",
+        build / ".opencode" / "lego-modellbyggaren-runtime.json",
+        build / ".opencode" / "runtime-scripts" / "validate_model.py",
+        build / ".opencode" / "runtime-scripts" / "export_validated_model.py",
+        build / "reference" / "catalog" / "catalog.json",
+        build / "reference" / "schemas" / "model.schema.json",
+    ]
+    for p in required:
+        if not p.exists():
+            errors.append(f"Missing OpenCode file: {p.relative_to(build)}")
+    return errors
+
+
 def validate_chat(root: Path, cfg: dict) -> list[str]:
     errors = []
     build = root / "build" / "chat"
@@ -123,6 +163,10 @@ def main() -> int:
     errors.extend(validate_chat(root, cfg))
     if cfg["runtime"]["custom_gpt"]["enabled"]:
         errors.extend(validate_custom(root, cfg))
+    if cfg.get("runtime", {}).get("claude", {}).get("enabled"):
+        errors.extend(validate_claude(root, cfg))
+    if cfg.get("runtime", {}).get("opencode", {}).get("enabled"):
+        errors.extend(validate_opencode(root, cfg))
 
     if errors:
         print("VALIDATION: FAIL")
