@@ -15,8 +15,8 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 7
-  last_completed_step: 6
+  current_step: 8
+  last_completed_step: 7
   completed_steps:
     - 1
     - 2
@@ -24,6 +24,7 @@ progress:
     - 4
     - 5
     - 6
+    - 7
   skipped_steps: []
   inserted_steps: []
 
@@ -75,9 +76,10 @@ runtime_baseline:
     claude: reduced
     opencode: equivalent
   openai_plugin:
-    status: assessment_pending
+    status: assessed_not_active
     intended_target: reduced
     advisory_only: true
+    assessment: docs/openai-plugin-compatibility.md
 
 gpt_builder_1_5:
   normalized_contract: gpt-builder-1.5-contract.yaml
@@ -159,6 +161,20 @@ opencode_verification:
   edit_permission: ask
   conversation_authoritative: false
 
+plugin_assessment:
+  status: passed
+  runtime: openai_plugin
+  compatibility: reduced
+  activation: not_active
+  advisory_only: true
+  assessment: docs/openai-plugin-compatibility.md
+  reasons:
+    - persistent_workspace_state_not_guaranteed
+    - deterministic_local_validation_not_guaranteed
+    - fail_closed_artifact_generation_not_guaranteed
+  canonical_behavior_changed: false
+  stable_release_unblocked: false
+
 runtime_activation:
   active_targets:
     - chat
@@ -172,8 +188,8 @@ runtime_activation:
   ci_passed: true
 
 next_step:
-  recommended: 7
-  title: OpenAI Plugin compatibility assessment
-  reason: "Claude Projects och OpenCode är nu riktiga distributionsmål. Claude är reducerad utan inbäddad lokal exekvering; OpenCode innehåller workspace-baserad katalog, schemas och deterministisk fail-closed validator/exportkedja."
+  recommended: 8
+  title: Generalisera build, parity, CI och release
+  reason: "OpenAI Plugin är nu explicit bedömd som reduced och advisory-only utan aktivering eftersom Plugin v1 inte kan garantera projektets persistenta workspace/state, deterministiska lokala validator-gate eller fail-closed artifact generation."
 
-human_readable_status: "Steg 1–6 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+human_readable_status: "Steg 1–7 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
