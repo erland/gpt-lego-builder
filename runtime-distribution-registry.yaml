@@ -21,9 +21,14 @@ planned_targets: []
 
 inactive_targets:
   openai_plugin:
-    status: assessment_pending
+    status: assessed_not_active
     compatibility: reduced
     advisory_only: true
+    assessment: docs/openai-plugin-compatibility.md
+    blockers:
+      - persistent_workspace_state_not_guaranteed
+      - deterministic_local_validation_not_guaranteed
+      - fail_closed_artifact_generation_not_guaranteed
 
 project_artifact:
   id: project
