@@ -19,6 +19,9 @@ jobs:
       - run: pip install -r scripts/requirements.txt
       - name: Project lint
         run: python scripts/lint_gpt_project.py --project-root .
+
+      - name: Validate GPT Builder 1.5 canonical contract
+        run: python scripts/validate_gpt_builder_1_5_contract.py
       - name: Unit and integration tests
         run: |
           python scripts/test_model_schema.py
