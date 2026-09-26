@@ -44,10 +44,21 @@ def main():
         errors.append("OpenCode planned compatibility mismatch")
 
     plugin=registry["inactive_targets"]["openai_plugin"]
-    if plugin.get("status")!="assessment_pending":
-        errors.append("OpenAI Plugin must remain assessment_pending in step 3")
+    if plugin.get("status")!="assessed_not_active":
+        errors.append("OpenAI Plugin must be assessed_not_active after step 7")
     if plugin.get("compatibility")!="reduced" or plugin.get("advisory_only") is not True:
-        errors.append("OpenAI Plugin baseline mismatch")
+        errors.append("OpenAI Plugin assessment mismatch")
+    if plugin.get("assessment")!="docs/openai-plugin-compatibility.md":
+        errors.append("OpenAI Plugin assessment document mismatch")
+    expected_plugin_blockers={
+        "persistent_workspace_state_not_guaranteed",
+        "deterministic_local_validation_not_guaranteed",
+        "fail_closed_artifact_generation_not_guaranteed",
+    }
+    if set(plugin.get("blockers", []))!=expected_plugin_blockers:
+        errors.append("OpenAI Plugin blockers mismatch")
+    if not (ROOT/plugin["assessment"]).is_file():
+        errors.append("OpenAI Plugin assessment document missing")
 
     release=registry["release"]
     if release.get("runtime_assets_from")!="active_targets":
@@ -71,7 +82,7 @@ def main():
         return 1
 
     print("OK: GPT Builder 1.5 runtime distribution registry")
-    print("Chat/Custom GPT active; Claude/OpenCode planned; release policy preserved")
+    print("Chat/Custom GPT/Claude/OpenCode active; OpenAI Plugin assessed reduced and inactive; release policy preserved")
     return 0
 
 if __name__=="__main__":
