@@ -44,6 +44,7 @@ runtime:
     instruction:
       mode: compiled
       max_characters: 8000
+      source: assistant/instructions.custom-gpt.md
     knowledge:
       strategy: prioritize
       max_files: 20
