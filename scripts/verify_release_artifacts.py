@@ -39,6 +39,8 @@ def main() -> int:
         f"{project_id}-project-{args.version}.zip",
         f"{project_id}-chat-{args.version}.zip",
         f"{project_id}-custom-gpt-{args.version}.zip",
+        f"{project_id}-claude-{args.version}.zip",
+        f"{project_id}-opencode-{args.version}.zip",
     }
     errors: list[str] = []
 
