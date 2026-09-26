@@ -80,6 +80,5 @@ resume:
   - scripts/test_ci_release_workflows.py
   - docs/release-readiness.md
   - docs/stable-release.md
-  - scripts/verify_stable_release.py
   - docs/known-limitations.md
   human_readable_status: Steg 18 är genomfört så långt denna miljö kan verifiera. Stable-release-gaten är implementerad och RC2 är klar. Stabil 1.0.0 kräver nu endast extern BrickLink Studio GUI-verifiering med status pass.
