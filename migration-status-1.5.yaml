@@ -15,11 +15,12 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 3
-  last_completed_step: 2
+  current_step: 4
+  last_completed_step: 3
   completed_steps:
     - 1
     - 2
+    - 3
   skipped_steps: []
   inserted_steps: []
 
@@ -88,9 +89,26 @@ gpt_builder_1_5:
   stable_release_unblocked: false
   ci_passed: true
 
-next_step:
-  recommended: 3
-  title: Inför runtime/distribution registry
-  reason: "Canonical capability-, artifact-, state- och tool-kontrakt är nu explicit normaliserade mot GPT Byggaren 1.5.0 och verifierade i CI utan att ändra RC2 eller stable-release-gaten."
+registry:
+  source_of_truth: runtime-distribution-registry.yaml
+  validation: scripts/validate_runtime_distribution_registry.py
+  builder_target_version: 1.5.0
+  active_targets:
+    - chat
+    - custom-gpt
+  planned_targets:
+    - claude
+    - opencode
+  artifact_policy: exact_active_target_set
+  release_assets_from: active_targets
+  wildcard_runtime_selection: false
+  preserve_official_ldraw_catalog_build: true
+  preserve_stable_release_gate: true
+  ci_passed: true
 
-human_readable_status: "Steg 1–2 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+next_step:
+  recommended: 4
+  title: Verifiera Chat-distributionen
+  reason: "Runtime-set, compatibility och artifact patterns är nu deklarativa. Chat/Custom GPT förblir aktiva medan Claude/OpenCode är planerade tills deras adapters faktiskt finns."
+
+human_readable_status: "Steg 1–3 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
