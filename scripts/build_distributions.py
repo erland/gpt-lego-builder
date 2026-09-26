@@ -283,9 +283,11 @@ def build_custom(root: Path, cfg: dict, build_root: Path, version: str) -> Path:
     kp = builder / "knowledge-package"
     kp.mkdir(parents=True)
 
-    instr = (root / cfg["instructions"]["canonical"]).read_text(encoding="utf-8")
-    max_chars = int(cfg["runtime"]["custom_gpt"]["instruction"]["max_characters"])
-    mode = cfg["runtime"]["custom_gpt"]["instruction"]["mode"]
+    instruction_cfg = cfg["runtime"]["custom_gpt"]["instruction"]
+    instruction_source = instruction_cfg.get("source", cfg["instructions"]["canonical"])
+    instr = (root / instruction_source).read_text(encoding="utf-8")
+    max_chars = int(instruction_cfg["max_characters"])
+    mode = instruction_cfg["mode"]
     core_markers = list(cfg.get("instructions", {}).get("core_contract", {}).get("required_markers", []) or [])
     compiled_instr = compile_custom_instruction(instr, mode, max_chars, core_markers)
     (builder / "instructions.md").write_text(compiled_instr, encoding="utf-8")
