@@ -15,13 +15,14 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 5
-  last_completed_step: 4
+  current_step: 6
+  last_completed_step: 5
   completed_steps:
     - 1
     - 2
     - 3
     - 4
+    - 5
   skipped_steps: []
   inserted_steps: []
 
@@ -119,9 +120,24 @@ chat_verification:
   development_content_leak: false
   ci_passed: true
 
-next_step:
-  recommended: 5
-  title: Verifiera Custom GPT
-  reason: "Chat-distributionen passerar nu GPT Byggaren 1.5.0-verifiering för canonical instruktion, katalog/schemas, deterministiska validatorer och fail-closed export."
+custom_gpt_verification:
+  instruction_source: assistant/instructions.custom-gpt.md
+  compiled_instruction_chars: 5084
+  instruction_budget_max: 8000
+  behavior_markers_preserved: true
+  authoritative_catalog_in_knowledge: true
+  critical_schemas_in_knowledge: true
+  code_interpreter_required: true
+  execution_parity: reduced
+  unrun_verification_explicit: true
+  false_pass_forbidden: true
+  false_file_delivery_claim_forbidden: true
+  existing_distribution_gate_passed: true
+  ci_passed: true
 
-human_readable_status: "Steg 1–4 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+next_step:
+  recommended: 6
+  title: Inför Claude Projects och OpenCode
+  reason: "Custom GPT använder nu en explicit 1.5-instruktionsprojektion inom 8000-teckensgränsen med katalog/schemas som Knowledge, Code Interpreter-krav, reducerad execution parity och explicit no-false-PASS."
+
+human_readable_status: "Steg 1–5 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
