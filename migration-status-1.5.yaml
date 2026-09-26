@@ -1,0 +1,84 @@
+schema_version: 1
+project:
+  id: lego-modellbyggaren
+  name: LEGO Modellbyggaren
+  product_plan:
+    status: complete
+    completed_step: 18
+    total_steps: 18
+  version: 1.0.0-rc.2
+
+migration:
+  target_builder_version: 1.5.0
+  strategy: behavior_preserving
+  plan: docs/gpt-builder-1.5-runtime-migration.md
+  total_steps: 9
+
+progress:
+  current_step: 2
+  last_completed_step: 1
+  completed_steps:
+    - 1
+  skipped_steps: []
+  inserted_steps: []
+
+state:
+  overall: warning
+  blocking_issues: []
+  warnings:
+    - "Canonical capability/artifact/workspace/tool-kontrakt behöver normaliseras mot GPT Byggaren 1.5.0."
+    - "Claude Projects och OpenCode saknas ännu."
+    - "Stable-release-dokumentationen är intern motsägelsefull och ska lösas i steg 9 utan att ändra manuell Stud.io-status."
+
+preservation:
+  canonical_instruction: assistant/instructions.md
+  project_contract: gpt-project.yaml
+  product_status: project-status.yaml
+  version_file: VERSION
+  preserve_product_plan_18_18: true
+  preserve_version_1_0_0_rc_2: true
+  preserve_fail_closed_validation: true
+  preserve_verified_parts_only: true
+  preserve_no_false_physics_guarantee: true
+  preserve_official_ldraw_release_gate: true
+  preserve_existing_tests_evals: true
+
+stable_release:
+  current_project_status: blocked
+  manual_studio_result_file: examples/studio-compatibility/manual-studio-results.md
+  manual_studio_status: not_run
+  migration_may_set_pass: false
+  migration_may_unblock_stable_release: false
+  documentation_conflict:
+    blocking_sources:
+      - project-status.yaml
+      - STATUS.md
+      - docs/release-readiness.md
+    non_blocking_source:
+      - docs/stable-release.md
+    resolution_step: 9
+    interim_policy: preserve_blocking_interpretation
+
+runtime_baseline:
+  active:
+    - chat
+    - custom-gpt
+  planned:
+    - claude
+    - opencode
+  intended_compatibility:
+    chat: equivalent_runtime_dependent
+    custom-gpt: equivalent_with_platform_constraints
+    claude: reduced
+    opencode: equivalent
+  openai_plugin:
+    status: assessment_pending
+    intended_target: reduced
+    advisory_only: true
+
+next_step:
+  recommended: 2
+  title: Normalisera canonical kontrakt mot GPT Byggaren 1.5.0
+  reason: "Separat migrationsspår är etablerat och preserve-first-reglerna skyddar 18/18, RC2, fail-closed validering och den externa Stud.io-gaten."
+
+human_readable_status: "Steg 1 av 9 i GPT Byggaren 1.5.0-migreringen är klart."
