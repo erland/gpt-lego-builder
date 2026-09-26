@@ -1,0 +1,127 @@
+schema_version: 1
+builder:
+  target_version: 1.5.0
+  strategy: normalize_existing_canonical_contract
+  behavior_preserving: true
+
+canonical:
+  project_contract: gpt-project.yaml
+  instruction: assistant/instructions.md
+  product_status: project-status.yaml
+  version_file: VERSION
+  stable_release_manual_result: examples/studio-compatibility/manual-studio-results.md
+
+contracts:
+  capabilities:
+    required:
+      - requirement_interpretation
+      - construction_planning
+      - authoritative_part_catalog_lookup
+      - internal_model_generation
+      - static_model_validation
+      - conservative_geometry_validation
+      - fail_closed_ldraw_export
+      - ldraw_file_generation
+      - incremental_repair
+      - explicit_limitation_reporting
+    recommended:
+      - deterministic_code_execution
+      - persistent_workspace_state
+    optional:
+      - external_research
+
+  artifacts:
+    required:
+      validated_model:
+        formats:
+          - ldr
+          - mpd
+        generation_gate: static_validation_pass
+        production_catalog_required: official_release
+      validation_report:
+        format: json
+        generated_by: scripts/validate_model.py
+      project_package:
+        pattern: lego-modellbyggaren-project-{version}.zip
+    conditional:
+      runtime_package:
+        condition: runtime_is_active
+
+  state:
+    authority: workspace_file
+    path: project-status.yaml
+    persistent: required
+    conversation_authoritative: false
+    resume_supported: true
+    product_plan_complete: 18
+    stable_release_phase: stable-release-blocked
+    manual_studio_status: not_run
+
+  tools:
+    required:
+      - id: validate-model
+        script: scripts/validate_model.py
+        purpose: blocking_static_validation
+        failure_policy: block
+      - id: export-validated-model
+        script: scripts/export_validated_model.py
+        purpose: fail_closed_ldraw_export
+        failure_policy: block
+      - id: authoritative-catalog
+        path: catalog/catalog.json
+        production_kind: official_release
+        fixture_production_allowed: false
+    supporting:
+      - scripts/interpret_requirements.py
+      - scripts/failure_handling.py
+      - scripts/run_evals.py
+      - scripts/test_runtime_parity.py
+      - scripts/verify_release_artifacts.py
+
+behavior:
+  required_markers:
+    - VERIFIERADE DELAR ENDAST
+    - STUDIO-KOMPATIBEL EXPORT
+    - INGEN FALSK FYSIKGARANTI
+  unknown_part_ids_may_be_invented: false
+  export_on_failed_validation: false
+  physical_stability_claim_without_verification: false
+  fixture_catalog_may_claim_production_verification: false
+  unrun_verification_is_pass: false
+
+release_policy:
+  current_version: 1.0.0-rc.2
+  preserve_version_during_migration: true
+  stable_release:
+    status: blocked
+    manual_gate:
+      file: examples/studio-compatibility/manual-studio-results.md
+      required_status: pass
+      current_status: not_run
+    migration_may_set_pass: false
+    migration_may_unblock: false
+
+runtime_policy:
+  existing:
+    chat:
+      compatibility: equivalent_runtime_dependent
+    custom-gpt:
+      compatibility: equivalent_with_platform_constraints
+  planned:
+    claude:
+      compatibility: reduced
+    opencode:
+      compatibility: equivalent
+  openai_plugin:
+    status: assessment_pending
+    target: reduced
+    advisory_only: true
+
+preservation:
+  product_plan_18_18: true
+  version_1_0_0_rc_2: true
+  canonical_behavior: true
+  fail_closed_validation: true
+  official_ldraw_release_gate: true
+  existing_tests_and_evals: true
+  manual_studio_not_run: true
