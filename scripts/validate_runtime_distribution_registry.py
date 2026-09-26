@@ -20,10 +20,10 @@ def main():
     active=registry["active_targets"]
     planned=registry["planned_targets"]
 
-    if active!=["chat","custom-gpt"]:
-        errors.append(f"active targets changed before adapters exist: {active}")
-    if planned!=["claude","opencode"]:
-        errors.append(f"planned targets mismatch: {planned}")
+    if active!=["chat","custom-gpt","claude","opencode"]:
+        errors.append(f"active targets mismatch: {active}")
+    if planned!=[]:
+        errors.append(f"planned targets must be empty after adapter activation: {planned}")
 
     if project["runtime"]["chat_zip"].get("enabled") is not True:
         errors.append("Chat must remain enabled")
@@ -33,9 +33,6 @@ def main():
     for rid in active:
         if registry["targets"][rid].get("status")!="active":
             errors.append(f"{rid}: status must be active")
-    for rid in planned:
-        if registry["targets"][rid].get("status")!="planned":
-            errors.append(f"{rid}: status must remain planned until adapter exists")
 
     if registry["targets"]["chat"]["compatibility"]!="equivalent_runtime_dependent":
         errors.append("Chat compatibility mismatch")
@@ -63,10 +60,9 @@ def main():
         errors.append("stable release gate must be preserved")
 
     policy=contract["runtime_policy"]
-    if set(policy["existing"].keys())!=set(active):
-        errors.append("normalized existing runtime set differs from registry active targets")
-    if set(policy["planned"].keys())!=set(planned):
-        errors.append("normalized planned runtime set differs from registry planned targets")
+    declared=set(policy["existing"].keys()) | set(policy["planned"].keys())
+    if declared!=set(active):
+        errors.append("normalized runtime target set differs from registry active targets")
 
     if errors:
         print("FAILED: GPT Builder 1.5 runtime distribution registry")
