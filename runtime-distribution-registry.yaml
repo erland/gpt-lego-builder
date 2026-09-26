@@ -14,10 +14,10 @@ builder_contract:
 active_targets:
   - chat
   - custom-gpt
-
-planned_targets:
   - claude
   - opencode
+
+planned_targets: []
 
 inactive_targets:
   openai_plugin:
@@ -45,14 +45,14 @@ targets:
     artifact_pattern: lego-modellbyggaren-custom-gpt-{version}.zip
     compatibility: equivalent_with_platform_constraints
   claude:
-    status: planned
+    status: active
     runtime_id: claude_project
     runtime_key: claude
     builder: claude
     artifact_pattern: lego-modellbyggaren-claude-{version}.zip
     compatibility: reduced
   opencode:
-    status: planned
+    status: active
     runtime_id: opencode
     runtime_key: opencode
     builder: opencode
