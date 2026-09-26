@@ -44,6 +44,19 @@ if 'inputs.version' not in release:
 if 'VERSION="${VERSION#v}"' not in release:
     errors.append("Release workflow does not normalize leading v")
 
+for workflow_name, text in [("CI", ci), ("Release", release)]:
+    build_lines = [line.strip() for line in text.splitlines() if "python scripts/build_distributions.py" in line]
+    if not build_lines:
+        errors.append(f"{workflow_name} has no distribution build command")
+    for line in build_lines:
+        if "--targets" in line:
+            errors.append(f"{workflow_name} hard-codes runtime targets instead of using runtime-distribution-registry.yaml")
+
+if "Build verified official LDraw catalog" not in release or "--kind official_release" not in release:
+    errors.append("Release no longer preserves official LDraw release-catalog gate")
+if "python scripts/test_studio_compatibility.py" not in release:
+    errors.append("Release no longer preserves stable-release compatibility gate")
+
 if errors:
     print("CI/RELEASE WORKFLOW TEST: FAIL")
     for error in errors:
