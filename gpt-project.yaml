@@ -52,6 +52,12 @@ runtime:
       capabilities: templates/capabilities.md.tpl
       readme: templates/README.custom-gpt.md.tpl
       compatibility: templates/COMPATIBILITY.md.tpl
+  claude:
+    enabled: true
+    compatibility: reduced
+  opencode:
+    enabled: true
+    compatibility: equivalent
 ci:
   enabled: true
   workflow: .github/workflows/ci.yml
