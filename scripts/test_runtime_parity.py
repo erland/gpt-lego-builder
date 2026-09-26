@@ -33,7 +33,9 @@ def main() -> int:
     args = ap.parse_args()
     root = Path(args.project_root).resolve()
     cfg = load_yaml(root / "gpt-project.yaml")
+    registry = load_yaml(root / "runtime-distribution-registry.yaml")
     version = (root / "VERSION").read_text(encoding="utf-8").strip()
+    active_targets = list(registry.get("active_targets", []) or [])
     chat = root / "build" / "chat"
     custom = root / "build" / "custom-gpt"
     errors: list[str] = []
@@ -81,19 +83,28 @@ def main() -> int:
         if marker not in compat:
             errors.append(f"Custom GPT compatibility report missing parity marker: {marker}")
 
-    # Version parity is mandatory across all generated surfaces.
-    for name, path in [("chat", chat / "VERSION"), ("custom-gpt", custom / "VERSION")]:
+    # Version and manifest parity are mandatory across every active runtime.
+    runtime_roots = [(name, root / "build" / name) for name in active_targets]
+    for name, runtime_root in runtime_roots:
+        if not runtime_root.exists():
+            errors.append(f"Active runtime build missing: {name}")
+            continue
+        path = runtime_root / "VERSION"
         actual = path.read_text(encoding="utf-8").strip() if path.exists() else "<missing>"
         if actual != version:
             errors.append(f"Version mismatch in {name}: {actual!r} != {version!r}")
-    for name, manifest in [("chat", chat / "MANIFEST.json"), ("custom-gpt", custom / "MANIFEST.json")]:
-        if manifest.exists():
-            actual = json.loads(manifest.read_text(encoding="utf-8")).get("version")
-            if actual != version:
-                errors.append(f"Manifest version mismatch in {name}: {actual!r} != {version!r}")
+        manifest = runtime_root / "MANIFEST.json"
+        if not manifest.exists():
+            errors.append(f"Manifest missing in active runtime: {name}")
+        else:
+            actual_manifest_version = json.loads(manifest.read_text(encoding="utf-8")).get("version")
+            if actual_manifest_version != version:
+                errors.append(f"Manifest version mismatch in {name}: {actual_manifest_version!r} != {version!r}")
 
     # Runtime packages may not leak development/test/cache artifacts.
-    for runtime_name, runtime_root in [("chat", chat), ("custom-gpt", custom)]:
+    for runtime_name, runtime_root in runtime_roots:
+        if not runtime_root.exists():
+            continue
         seen_hashes: dict[str, str] = {}
         for p in runtime_root.rglob("*"):
             if not p.is_file():
@@ -116,7 +127,10 @@ def main() -> int:
         "version": version,
         "critical_markers": len(markers),
         "behavior_parity": "full" if not errors else "failed",
-        "execution_parity": {"chat": "full", "custom_gpt": "reduced"},
+        "execution_parity": {
+            name: registry["targets"][name]["compatibility"]
+            for name in active_targets
+        },
         "errors": errors,
         "warnings": warnings,
     }
@@ -125,7 +139,9 @@ def main() -> int:
 
     print("RUNTIME PARITY:", report["result"].upper())
     print(f"Behavior markers: {len(markers)}")
-    print("Execution parity: Chat=full, Custom GPT=reduced")
+    print("Active runtime parity:", ", ".join(
+        f"{name}={registry['targets'][name]['compatibility']}" for name in active_targets
+    ))
     for w in warnings:
         print("WARNING:", w)
     for e in errors:
