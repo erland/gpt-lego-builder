@@ -15,8 +15,8 @@ migration:
   total_steps: 9
 
 progress:
-  current_step: 8
-  last_completed_step: 7
+  current_step: 9
+  last_completed_step: 8
   completed_steps:
     - 1
     - 2
@@ -25,6 +25,7 @@ progress:
     - 5
     - 6
     - 7
+    - 8
   skipped_steps: []
   inserted_steps: []
 
@@ -175,6 +176,17 @@ plugin_assessment:
   canonical_behavior_changed: false
   stable_release_unblocked: false
 
+generalized_runtime_pipeline:
+  status: passed
+  registry_is_source_of_truth: true
+  build_targets_derived_from_registry: true
+  parity_active_targets_derived_from_registry: true
+  release_artifacts_derived_from_registry: true
+  ci_runtime_list_hardcoded: false
+  release_runtime_list_hardcoded: false
+  official_ldraw_release_gate_preserved: true
+  stable_release_gate_preserved: true
+
 runtime_activation:
   active_targets:
     - chat
@@ -188,8 +200,8 @@ runtime_activation:
   ci_passed: true
 
 next_step:
-  recommended: 8
-  title: Generalisera build, parity, CI och release
-  reason: "OpenAI Plugin är nu explicit bedömd som reduced och advisory-only utan aktivering eftersom Plugin v1 inte kan garantera projektets persistenta workspace/state, deterministiska lokala validator-gate eller fail-closed artifact generation."
+  recommended: 9
+  title: Slutlig readiness och dokumentationssynk
+  reason: "Build, parity, CI och release härleder nu runtime-set och release-artifacts från runtime-distribution-registry.yaml utan hårdkodade runtime-listor, samtidigt som official LDraw- och stable-release-gates är bevarade."
 
-human_readable_status: "Steg 1–7 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
+human_readable_status: "Steg 1–8 av 9 i GPT Byggaren 1.5.0-migreringen är klara."
