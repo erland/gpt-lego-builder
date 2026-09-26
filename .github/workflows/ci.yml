@@ -53,6 +53,9 @@ jobs:
           python scripts/test_runtime_parity.py --project-root .
           printf '%s\n' "$VERSION_BACKUP" > VERSION
           python scripts/verify_release_artifacts.py --project-root . --version 0.16.0-ci
+
+      - name: Validate GPT Builder 1.5 Chat distribution
+        run: python scripts/validate_chat_gpt_builder_1_5.py --artifact dist/lego-modellbyggaren-chat-0.16.0-ci.zip
       - name: Workflow contract tests
         run: python scripts/test_ci_release_workflows.py
       - uses: actions/upload-artifact@v4
